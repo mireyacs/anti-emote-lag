@@ -1,8 +1,6 @@
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 
-local SHOW_CONSOLE_OUTPUT = false
-
 local ANIMATION_WHITELIST = {
 	-- Astronaut
 	891636393, 891627522, 891621366, 891633237, 1047759695, 891617961, 891639666, 891663592, 891609353,
@@ -64,6 +62,8 @@ local ANIMATION_WHITELIST = {
 	10921240218, 10921244891, 10921241244, 10921242013, 10921230744, 10921243048, 10921229866,
 	-- NFL
 	134630013742019, 129773241321032, 92080889861410, 119846112151352, 117333533048078, 132697394189921, 110358958299415,
+	-- Misc
+	10921259953, 10789327257, 10921261968, 10921269718, 14366558676, 10921258489, 76049494037641, 102357151005774, 507766951
 }
 
 local whitelistSet = {}
@@ -95,9 +95,6 @@ local function monitorCharacter(character)
 					
 					if numericId and not isWhitelisted(numericId) then
 						track:Stop()
-						if SHOW_CONSOLE_OUTPUT then
-							warn("Stopped non-whitelisted animation:", numericId)
-						end
 					end
 				end
 			end
@@ -137,8 +134,4 @@ for _, player in pairs(Players:GetPlayers()) do
 	player.CharacterAdded:Connect(function(character)
 		monitorCharacter(character)
 	end)
-end
-
-if SHOW_CONSOLE_OUTPUT then
-	print("Anti Emote Lag script loaded. Whitelist contains", #ANIMATION_WHITELIST, "animation IDs.")
 end
